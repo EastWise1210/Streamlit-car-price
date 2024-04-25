@@ -9,7 +9,7 @@ from More_about import run_more_about
 #from pyparsing import empty
 
 
-#st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 #empty1,con1,empty2 = st.columns([0.3,1.0,0.3])
 #empyt1,con2,con3,empty2 = st.columns([0.3,0.5,0.5,0.3])
 #empyt1,con4,empty2 = st.columns([0.3,1.0,0.3])
@@ -122,10 +122,46 @@ AWS 클라우드 서버 서비스 이용하기 위해서,
 
 
 정리 : AWS 배포를 위해 EC2라는 하드웨어 자원을 할당받고
-이 1. 빈 깡통에  2. OS설치  3. 구동을 위한 APP(파이썬, 아나콘다)  4. 가상환경 생성(관련 라이브러리 모두 인스톨)  5. 구성된 환경에 소스코드 업로드
+이 1. 빈 깡통에  2. OS설치  3. 구동을 위한 APP(파이썬, 아나콘다)  4. 가상환경 생성(numpy, pandas, matplotlib 등 관련 라이브러리 모두 인스톨)
+5. 구성된 환경에 소스코드 업로드
+
+※5번에서 소스코드 업로드 할 때 어떻게?  -->  원격 레포지토리를 EC2에 클론하고 pull하면 코드 적재 완료
 
 
-소스코드 업로드 할 때 어떻게?  -->  원격 레포지토리를 EC2에 클론하고 pull하면 코드 적재 완료
+과정
+AWS 콘솔 로그인  -->  EC2(클라우드 가상 서버) 서비스 선택  -->  리전(Asia - Seoul) 선택(확인)  -->  인스턴스 시작
+
+-->  이름 및 태그 탭에서 이름 입력  -->  어플리케이션 및 os이미지 : Amazon Linux 선택  -->  선택 후 하단 메뉴에서 프리티어 사용 가능한 유형으로 선택
+-->  인스턴스 유형 : t2(프리티어 사용 가능 버전)  -->  키 페어(보안 장치) : 새로운 키 페어 생성 : 키페어 이름, 유형, 키 파일 형식 지정
+-->  스토리지 구성 : 볼륨 30  -->  프로세스 시작
+※주의 : 키파일은 재발급 안 됨  -->  키 파일 분실시 해당 서버에 접속하는 다른 방법 아예 X : 서버 삭제하고 새로운 서버 다시 개설해야 함
+
+-->  모든 인스턴스 보기로 확인  -->  EC2 리소스 생성 및 OS 설치가 완료 되었으면 서버의 환경 조성을 위해서 응용 프로그램 설치 위해 원격 접속해야 함
+-->  LINUX는 OpenSSH  /  WINDOWS는 PuTTY : 내 컴퓨터에 PuTTY 설치  -->  
+
+
+
+1. PuTTY :  Session - host name란에 발급 받은 aws EC2 퍼블릭 ip주소 입력
+            connection - SSH - Auth - Credentials : 발급 받은 프라이빗 키 파일(ppk) 연결
+            간편 연결을 위해서 Session - save&load 이용
+            설정 다 끝났으면 Open -> Login as : ec2-user 로그인
+            
+-------------------------------여기까지 EC2 리소스에 원격 접속 단계 완료
+
+2. 필요한 응용 프로그램들 설치
+아나콘다 리눅스 버전 프로그램의 url 주소 복사하여 원격 접속한 cmd 창에서 다운로드
+url = repo.anaconda.com/archive/Anaconda3-2024.02.1-Linux-x86_64.sh
+$ wget https://repo.anaconda.com/archive/Anaconda3-2024.02.1-Linux-x86_64.sh
+경로는 home 디렉토리(/home/ec2-user)
+$ sh Anaconda3-2024.02-1-Linux-x86_64.sh
+
+
+
+
+
+※<AWS에서 관련 설명서(putty를 이용하여 연결)에 잘 안내되어 있음>
+
+
 
 '''
 
