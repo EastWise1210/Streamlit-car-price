@@ -4,12 +4,13 @@ from col_max_min import run_col_max_min
 
 
 def run_eda():
-    st.header('탐색적 데이터 분석')
-    st.subheader('Prediction about Car Purchasing Total')
-    st.text('''탐색적 데이터 분석(Exploratory Data Analysis)은
-모델링(modeling)에 앞서 데이터를 살피는 모든 과정을 의미합니다.
-이 메뉴에서는 자동차 구매예측 데이터프레임에 대한 다양한 정보를 제공하며,
-하단의 선택메뉴 중 사용자의 선택에 따라 여러 지표들을 알려드립니다.''')
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align:center;'>1. 탐색적 데이터 분석</h2>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align:center;'>EDA(Exploratory Data Analysis)</h4>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center;'>탐색적 데이터 분석(Exploratory Data Analysis)은 모델링(modeling)에 앞서 데이터를 살피는 모든 과정을 의미합니다.<br></p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center;'>이 메뉴에서는 자동차 구매예측 데이터프레임에 대한 다양한 정보를 제공하며, 하단의 선택메뉴 중 사용자의 선택에 따라 여러 지표들을 알려드립니다.<br></p>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
 
     radio1_list = ['데이터프레임', '통계']
     sel_radio1 = st.radio(label='1.열람할 메뉴를 선택해주세요.', options=radio1_list)
@@ -36,3 +37,5 @@ def run_eda():
 
 
     run_col_max_min()
+
+
