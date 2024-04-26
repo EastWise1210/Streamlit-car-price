@@ -52,15 +52,13 @@ def run_ml():
         new_data = np.array(new_data).reshape(1, -1)
 
     #2-3. 모델의 predict 수행
-        y_pred = regressor.predict(new_data)
-
+        y_pred = regressor.predict(new_data)   #작동 방법 예시들 
         y_pred1 = y_pred[0]
         y_pred2 = round(y_pred1)
-
-        y_pred3 = format(y_pred2, ",")
+        y_pred3 = format(y_pred2, ",") 
 
         st.text(f'상단에 입력하신 정보에 대한 자동차 구매금액 예측값은 {y_pred3} 달러입니다.') #첫번째 방법
-        st.text(f'상단에 입력하신 정보에 대한 자동차 구매금액 예측값은 {y_pred2:,} 달러입니다.') #두번째 방법
+        #st.text(f'상단에 입력하신 정보에 대한 자동차 구매금액 예측값은 {y_pred2:,} 달러입니다.') #두번째 방법
     #첫번째와 두번째 방법 모두 같은 결과 도출
 
     else:
