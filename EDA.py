@@ -33,9 +33,9 @@ def run_eda():
             st.dataframe(df.corr(numeric_only=True))
 
             #상관계수 그래프
-            st.markdown('<h3 style="text-align:center;">2. 전체 상관관계 그래프</h3>', unsafe_allow_html=True)
-            fig1 = sb.pairplot(data=df, vars=df.columns)
-            st.pyplot(fig1)
+            #st.markdown('<h3 style="text-align:center;">2. 전체 상관관계 그래프</h3>', unsafe_allow_html=True)
+            #fig1 = sb.pairplot(data=df, vars=df.columns)
+            #st.pyplot(fig1)
 
             #히트맵
             st.markdown('<h3 style="text-align:center;">2. 전체 상관관계 히트맵</h3>', unsafe_allow_html=True)
