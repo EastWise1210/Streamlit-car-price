@@ -1,5 +1,4 @@
 import streamlit as st
-from utils import html_temp
 
 def run_home():
     st.markdown("<br><br>", unsafe_allow_html=True)

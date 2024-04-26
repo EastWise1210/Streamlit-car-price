@@ -28,13 +28,13 @@ def run_ml():
     age = st.number_input(label='나이 입력', min_value=18, max_value=110, value=28, step=1)
 
     st.text('연봉을 입력하세요')
-    an_sal = st.number_input(label='연봉 입력', min_value=18000, value=24000)
+    an_sal = st.number_input(label='연봉 입력', min_value=18000, value=24000, step=1000)
 
     st.text('카드 빚을 입력하세요')
-    card_debt = st.number_input(label='카드빚 입력', min_value=0)
+    card_debt = st.number_input(label='카드빚 입력', min_value=0, step=200)
 
     st.text('자산을 입력하세요')
-    net_worth = st.number_input(label='자산 입력', min_value=0)
+    net_worth = st.number_input(label='자산 입력', min_value=0, step=500)
 
 
     #버튼으로 동작

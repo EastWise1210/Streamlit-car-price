@@ -3,7 +3,8 @@ import pandas as pd
 
 
 def run_col_max_min():
-    st.text('선택하신 컬럼을 기준으로 최대/최소 데이터 행을 보여드립니다.')
+    st.markdown('<br><br>', unsafe_allow_html=True)
+    st.markdown('<h4 style="text-align:center;">선택하신 컬럼을 기준으로 최대/최소 데이터 행을 보여드립니다.</h4>', unsafe_allow_html=True)
 
     df = pd.read_csv('./data/Car_Purchasing_Data.csv')
     column_list=['Age', 'Annual Salary', 'Credit Card Debt', 'Net Worth', 'Car Purchase Amount']
