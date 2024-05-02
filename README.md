@@ -1,13 +1,3 @@
-# Streamlit-car-price
-making Web Dashboard using Streamlit and scikit-learn library
-
-머신러닝(Machine Learning) 모델을 이용하여 자동차 구매 금액을 예측하는 서비스를 제공하는 웹 대시보드를 구현한 미니 프로젝트입니다.
-
-개발 도구로 쥬피터 노트북(Jupyter Notebook)과 비주얼 스튜디오 코드(Visual Studio Code) 그리고 Streamlit 프레임워크를 활용하였습니다.
-주요 사용 라이브러리는 pandas, scikit-learn, matplotlib, seaborn입니다.
-
-
-
 
 
 
@@ -20,8 +10,8 @@ making Web Dashboard using Streamlit and scikit-learn library
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h5>머신 러닝(Machine Learning) 기법 중 예측[Prediction]에 해당하는 LinearRegression 모델을 적용한 웹 대시보드 프로젝트입니다.</h5>
-    <h5>사용자가 업로드한 csv 파일 데이터에 대해 데이터들간의 함수 관계를 찾아 타겟 데이터에 대한 예측값을 결과로 표시하는 서비스를 제공합니다.</h5>
+    <h5>머신 러닝(Machine Learning) 기법 중 예측[Prediction]에 해당하는 LinearRegression 모델을 이용하여 자동차 구매 금액을 예측하는 서비스를 제공하는 웹 대시보드 프로젝트입니다.</h5>
+    <h5>사용자가 업로드한 csv 파일 데이터에 대해 데이터들간의 함수 관계를 찾아 타겟 데이터에 대한 예측값을 결과로 표시합니다.</h5>
 <br>
     <h6>■링크 : 링크 삽입 자리</h6>
 <br>
