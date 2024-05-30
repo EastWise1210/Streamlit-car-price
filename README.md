@@ -1,6 +1,5 @@
 
 
-
 ![header](https://capsule-render.vercel.app/api?type=Venom&color=gradient&height=200&section=header&text=머신러닝%20웹%20대시보드(1)&fontSize=60&fontAlignY=60&animation=fadeIn)
 
 <!DOCTYPE html>
@@ -21,39 +20,43 @@
     <li>머신러닝은 인간의 고등 지적능력인 '학습 - 추론'을 모방한 알고리즘임</li>
     <li>지도 학습[Supervised Learning]과 비지도 학습[Unsupervised Learning]으로 구분할 수 있으며, 지도 학습은 알고리즘 모델에게 데이터를 통한 별도의 학습 과정이 필요함</li>
     <li>본 대시보드에서 사용한 LinearRegression 모델은 지도 학습에 해당되며, 타겟 컬럼에 대한 함수 관계를 파악하여 회귀적으로 분석하여 예측함</li>
-    <li>모델의 성능은 실제값과 예측값의 차이의 제곱인 MSE 및 RMSE로 평가함</li>
-    <li>선형회귀분석은 데이터들간의 상관관계를 파악할 수 있기에 다양한 학문 분야에서 유용하게 이용됨</li>
+    <li>모델의 성능은 실제값과 예측값의 차이의 제곱인 MSE 및 RMSE 등 오차의 크기로 평가함</li>
+    <li>이와 같은 선형회귀 분석은 데이터들간의 상관관계를 파악할 수 있기에 다양한 학문 분야에서 유용하게 이용됨</li>
   </ol>
 <br>    
 <!--목차 2. 개발목적 표기-->
     <h3>2. 개발 목적</h3>
   <ul>
-    <li>사용자 임의의 CSV파일 속 데이터에 대해 인공지능 모델을 통해 예측 결과를 제공하여, 필요로 하는 분야에서 변수들간의 관계 파악에 도움이 되는 서비스 구현을 목적으로 함</li>
+    <li>사용자 임의의 CSV파일 속 데이터에 대해 인공지능 모델을 통해 예측 결과를 제공하여, 필요로 하는 분야에서 변수들간의 상관관계 파악에 도움이 되는 서비스 구현을 목적으로 함</li>
   </ul>
 <br>
 <!--3번부터 해당 모델에 맞는 내용으로 수정할 것-->
 <!--3. 개발방법 서술-->
     <h3>3. 개발 방법</h3>
   <ol start="1" type="a">
-    <li>로컬에 Anaconda Prompt로 가상환경 생성하고 Python(ver 3.10) 및 주요 라이브러리(numpy, pandas, matplotlib, seaborn, scikit-learn, joblib, ipython, pillow, jupyter) 설치하여 개발환경 구축 </li>
+    <li>로컬에 Anaconda Prompt로 가상환경 생성하고 Python(ver 3.10) 및 주요 라이브러리(numpy, pandas, matplotlib, seaborn, scikit-learn, ipython, pillow, jupyter) 설치하여 개발환경 구축 </li>
     <li>Github에 원격 Repository를 생성하고 Github Desktop을 이용해서 로컬에 clone한 뒤 Visual Studio Code로 연동하여 작업환경 구성</li>
-    <li>먼저, 코드 결과를 즉시 확인하기 편리한 jupyter notebook에서 작업</li>
+    <li>먼저, 인공지능 모델 생성을 위해 jupyter notebook에서 작업</li>
     <ol start="1" type="1">
       <li>모델 생성(학습 및 성능평가)에 사용할 csv파일 준비 및  pandas의 read_csv() 메소드 이용하여 DataFrame으로 저장</li>
       <li>라벨링 상태 확인 후 isna().sum()으로  결측값(NaN 등) 존재여부 조회 및 해당 데이터 drop</li>
       <li>전체 컬럼 중 학습에 사용할 (타겟)컬럼 분리(ex> id 등 예측 목적에 상관 없는 컬럼들을 제외)</li>
       <li>분리한 컬럼들 중 dtype이 object인 경우 Encoding 작업 수행하되, 해당 cartegorical column의 nunique 값에 따라 구분</li>
         <ul>
-          <li>-nunique >= 3 경우 sklearn의 ColumnTransformer와 OneHotEncoder 이용</li>
+          <li>nunique >= 3 경우 sklearn의 ColumnTransformer와 OneHotEncoder 이용</li>
           <li>nunique <= 2 경우 sklearn의 LabelEncoder 이용</li>
         </ul>
-      <li>clustering의 경우 feature scaling, train_test_split이 필요 없으므로 생략</li>
-      <li>kmeans 모델 생성 후 최적의 k값을 찾기 위해 wcss를 계산하고 matplotlib으로 시각화하여 elbow method로 확인</li>
-      <li>최적의 k 값을 대입시켜 다시 kmeans 모델 생성</li>
-      <li>위에서 encoding까지 끝난 데이터프레임을 다시 생성한 kmeans 모델에 대입하고 이 predict 결과를 'Group'컬럼으로 만들어 데이터프레임에 추가한 뒤 점검</li>
-      <li>생성한 모델을 .pkl 파일로 저장</li>
+      <li>LinearRegression의 경우 모델이 작업 수행시 자동으로 feature scaling을 진행하므로 별도의 과정은 필요 없음</li>
+      <li>train_test_split()을 이용해 학습(훈련)용과 시험용 데이터로 분리</li>
+      <li>LinearRegression 모델 생성한 뒤 파라미터에 훈련용 데이터를 입력해 학습</li>
+      <li>.coef_와 .intercept_를 이용하여 모델이 학습하여 도출한 linear combination의 계수와 상수를 확인</li>
+      <li>학습이 완료된 모델에 시험(test)용 데이터를 입력해 예측값 계산하여 y_pred 변수로 저장</li>
+      <li>성능 평가를 위해 y_test와 y_pred의 차이의 제곱인 MSE 계산하여 확인</li>
+      <li>joblib을 이용해 해당 인공지능 모델과 ColumnTransformer를 .pkl 파일로 저장</li>
     </ol>
-    <li>clone한 repository 폴더에 app.py 파일을 만들고 Visual Studio Code로 위 과정의 소스코드를 빌드하며 streamlit run app.py로 작동여부 확인하며 디버깅</li>
+    <li>clone한 repository 폴더에 app.py 파일 생성</li>
+    <li>jupyter notebook에서 생성한 모델의 .pkl 파일을 joblib으로 불러와 저장</li>
+    <li>Visual Studio Code로 app.py 파일 빌드하며 streamlit run app.py로 작동여부 확인하며 디버깅</li>
     <li>빌드 및 디버깅 완료 후 commit하고 Github 원격 repository에 push까지 마무리</li>
     <li>서버로 사용할 AWS EC2 인스턴스를 생성하고 OS는 Amazon Linux로 설정</li>
     <li>원격 접속을 위해 PuTTY에 실행시 해당 인스턴스의 퍼블릭 IP address와 키 페어 .ppk파일 경로 정보 저장</li>
@@ -61,7 +64,7 @@
     <li>서버에 Git 소프트웨어 설치 후 위와 동일한 Github Repository를 clone한 뒤 해당 파일을 pull하여 저장</li>
     <li>$ nohup streamlit run app.py --server.port [포트넘버] 명령어로 백그라운드 실행</li>
     <li>해당 인스턴스가 속한 보안 그룹의 인바운드 규칙을 편집하여 접근 가능하도록 방화벽 설정(해당 포트 오픈)</li>
-    <li>AWS EC2 인스턴스에 할당된 퍼블릭 IP address를 웹 브라우저에 입력하여 서비스 배포 여부 최종 확인</li>
+    <li>AWS EC2 인스턴스에 할당된 퍼블릭 IP address를 웹 브라우저에 입력하여 서비스 정상 배포여부 최종확인</li>
   </ol>
 <br>
 <!--목차 4. 개발환경 요약-->
@@ -70,7 +73,7 @@
     <li>[가상환경] : Anaconda를 사용하여 가상환경(Python 3.10, 주요 라이브러리 설치) 생성</li>
     <li>[코드 에디터] : Visual Studio Code, Jupyter Notebook</li>
     <li>[프레임워크] : Streamlit</li>
-    <li>[주요 라이브러리] : numpy, pandas, matplotlib, seaborn, scikit-learn, joblib, ipython, pillow, jupyter</li>
+    <li>[주요 라이브러리] : numpy, pandas, matplotlib, seaborn, scikit-learn, ipython, pillow, jupyter</li>
     <li>[버전 관리] : Github Desktop를 이용하여 원격 레포지토리에서 로컬로 clone한 뒤 작업시 commit & push</li>
     <li>[서버 관리] : AWS EC2 클라우드 컴퓨팅 서비스 이용하여 인스턴스 생성 후 PuTTY로 원격접속하여 개발 환경과 동일한 가상 환경으로 관리</li>
     <li>[서비스 방법] : Github 원격 레포지토리에서 작업 파일을 EC2 서버에 pull하여 업로드하고 백그라운드 실행 설정 및 개별 포트 지정하여 하나의 서버에서 여러 대시보드 가동하도록 설정</li>
